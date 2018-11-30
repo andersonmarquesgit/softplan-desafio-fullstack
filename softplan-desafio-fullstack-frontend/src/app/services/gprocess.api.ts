@@ -1,0 +1,1 @@
+export const G_PROCESS_API: string = "http://localhost:8888"
