@@ -1,3 +1,4 @@
+import { SharedService } from './services/shared.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'softplan-desafio-fullstack-frontend';
+  showTemplate: boolean = false;
+  public shared : SharedService;
+  title = 'softplan-processos';
+
+  constructor(){
+    this.shared = SharedService.getInstance();
+  }
+
+  ngOnInit(){
+    this.shared.showTemplate.subscribe(
+      show => this.showTemplate = show
+    );
+  }
 }
