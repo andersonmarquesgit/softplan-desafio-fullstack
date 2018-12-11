@@ -34,6 +34,6 @@ export class ProcessService {
   }
 
   assignUser(id:string, assignUsers:Array<string>){
-
+    return this.http.put(`${G_PROCESS_API}/api/process`, assignUsers);
   }
 }
