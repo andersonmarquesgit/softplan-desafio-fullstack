@@ -59,7 +59,7 @@ export class UserNewComponent implements OnInit {
       });
     }, err => {
       this.showMessage({
-        type: 'err',
+        type: 'error',
         text: err['error']['errors'][0]
       });
     });
@@ -70,7 +70,7 @@ export class UserNewComponent implements OnInit {
     this.buildClasses(message.type);
     setTimeout(() => {
       this.message = undefined;
-    }, 3000);
+    }, 4000);
   }
 
   private buildClasses(type: string): void{
