@@ -26,4 +26,5 @@ export class AppComponent {
       'content-wrapper' : this.shared.isLoggedIn()
     }
   }
+  
 }

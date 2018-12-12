@@ -1,5 +1,9 @@
 package com.softplan.restapi.api.security.config;
 
+import java.util.Collections;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +19,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.softplan.restapi.api.security.jwt.JwtAuthenticationEntryPoint;
 import com.softplan.restapi.api.security.jwt.JwtAuthenticationTokenFilter;
@@ -61,6 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests()
+			.antMatchers("/api/auth/**").permitAll()
+			.anyRequest().authenticated()
 			.antMatchers(HttpMethod.GET, 
 					"/",
 					"/*.html",
@@ -69,9 +78,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/**/*.css",
 					"/**/*.js"
 			).permitAll()
-			.antMatchers("/api/auth/**").permitAll()
-			.anyRequest().authenticated();
+			.and().httpBasic()
+            .and().headers().frameOptions().disable()
+            .and().csrf().disable();
+//            .headers()
+//            // the headers you want here. This solved all my CORS problems! 
+//            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"))
+//            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST, GET"))
+//            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Max-Age", "3600"))
+//            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
+//            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization"));
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().cacheControl();
+		
+		httpSecurity.cors().configurationSource(new CorsConfigurationSource() {
+	        @Override
+	        public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+	            CorsConfiguration config = new CorsConfiguration();
+	            config.setAllowedHeaders(Collections.singletonList("*"));
+	            config.setAllowedMethods(Collections.singletonList("*"));
+	            config.addAllowedOrigin("*");
+	            config.setAllowCredentials(true);
+	            return config;
+	        }
+	      });
+
 	}
 }

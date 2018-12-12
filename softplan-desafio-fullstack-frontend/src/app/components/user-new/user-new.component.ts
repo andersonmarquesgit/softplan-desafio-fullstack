@@ -51,18 +51,18 @@ export class UserNewComponent implements OnInit {
     this.message = {};
     this.userService.createOrUpdate(this.user).subscribe((responseApi: ResponseApi) => {
       this.user = new User('','','','');
-      let userRet : User = responseApi.data;
+      let userRet: User = responseApi.data;
       this.form.resetForm();
       this.showMessage({
         type: 'success',
-        text: `Registered ${userRet.email} successfuly`
-      })
+        text: `Registered ${userRet.email} successfully`
+      });
     }, err => {
       this.showMessage({
-        type: 'error',
+        type: 'err',
         text: err['error']['errors'][0]
-      })
-    })
+      });
+    });
   }
 
   private showMessage(message: {type: string, text: string}){
