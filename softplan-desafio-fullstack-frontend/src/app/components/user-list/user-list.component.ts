@@ -69,6 +69,29 @@ export class UserListComponent implements OnInit {
       })
   }
 
+  setNextPage(event:any){
+    event.presentDefault();
+    if(this.page + 1 < this.pages.length){
+      this.page = this.page + 1;
+      this.findAll(this.page, this.count);
+    }
+  }
+
+  setPrevPage(event:any){
+    event.presentDefault();
+    if(this.page > 0){
+      this.page = this.page - 1;
+      this.findAll(this.page, this.count);
+    }
+  }
+
+  setPage(i,event:any){
+    event.presentDefault();
+    this.page = i;
+    this.findAll(this.page, this.count);
+    
+  }
+
   private showMessage(message: {type: string, text: string}){
     this.message = message;
     this.buildClasses(message.type);
