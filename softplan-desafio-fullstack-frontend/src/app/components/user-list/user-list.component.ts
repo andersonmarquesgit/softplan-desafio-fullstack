@@ -44,6 +44,31 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  edit(id:string){
+    this.router.navigate(['/user-new', id]);
+  }
+
+  delete(id:string){
+    this.dialogService.confirm('Do you want to delete the user ?')
+      .then((candelete:boolean) => {
+        if(candelete){
+          this.message = {};
+          this.userService.delete(id).subscribe((responseApi:ResponseApi) => {
+            this.showMessage({
+              type: 'success',
+              text: 'Record deleted'
+            });
+            this.findAll(this.page, this.count);
+          }, err => {
+            this.showMessage({
+              type: 'error',
+              text: err['error']['errors'][0]
+            });
+          });
+        }
+      })
+  }
+
   private showMessage(message: {type: string, text: string}){
     this.message = message;
     this.buildClasses(message.type);
