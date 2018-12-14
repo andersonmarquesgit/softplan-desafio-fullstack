@@ -3,26 +3,26 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-edit"></i> <span>User</span>
+          <i class="fa fa-user"></i> <span>User</span>
           <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-left pull-right" aria-hidden="true"></i>
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a [routerLink]="['/user-list']"><i class="fa fa-circle-o"></i> List</a></li>
-          <li><a [routerLink]="['/user-new']"><i class="fa fa-circle-o"></i> New User</a></li>
+          <li><a [routerLink]="['/user-list']"><i class="fa fa-users" aria-hidden="true"></i> List</a></li>
+          <li><a [routerLink]="['/user-new']"><i class="fa fa-user-plus" aria-hidden="true"></i> New User</a></li>
         </ul>
       </li>
       <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Process</span>
+            <i class="fa fa-file-text"></i> <span>Process</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-left pull-right" aria-hidden="true"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> List</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> New Process</a></li>
+            <li><a href="pages/forms/general.html"><i class="fa fa-list-alt" aria-hidden="true"></i> List</a></li>
+            <li><a [routerLink]="['/process-new']"><i class="fa fa-file-text-o" aria-hidden="true"></i> New Process</a></li>
           </ul>
         </li>
     </ul>

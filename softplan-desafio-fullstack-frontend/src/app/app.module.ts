@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { UserNewComponent } from './components/user-new/user-new.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { DialogService } from './dialog.service';
+import { ProcessNewComponent } from './components/process-new/process-new.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DialogService } from './dialog.service';
     HomeComponent,
     LoginComponent,
     UserNewComponent,
-    UserListComponent
+    UserListComponent,
+    ProcessNewComponent
   ],
   imports: [
     BrowserModule,

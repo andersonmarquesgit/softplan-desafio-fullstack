@@ -94,7 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            config.setAllowCredentials(true);
 	            return config;
 	        }
-	      });
+	    });
 
 	}
 }

@@ -1,3 +1,4 @@
+import { ProcessNewComponent } from './components/process-new/process-new.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserNewComponent } from './components/user-new/user-new.component';
 import { AuthGuard } from './components/security/auth.guard';
@@ -11,6 +12,8 @@ export const ROUTES: Routes = [
     { path : 'login', component : LoginComponent},
     { path : 'user-new', component : UserNewComponent, canActivate: [AuthGuard]},
     { path : 'user-new/:id', component : UserNewComponent, canActivate: [AuthGuard]},
+    { path : 'process-new', component : ProcessNewComponent, canActivate: [AuthGuard]},
+    { path : 'process-new/:id', component : ProcessNewComponent, canActivate: [AuthGuard]},
     { path : 'user-list', component : UserListComponent, canActivate: [AuthGuard]}
 ]
 
