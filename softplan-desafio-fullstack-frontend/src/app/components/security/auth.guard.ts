@@ -1,5 +1,5 @@
 import { SharedService } from './../../services/shared.service';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 
@@ -7,9 +7,8 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
 
     public shared : SharedService;
-    router: any;
 
-    constructor(){
+    constructor(private router: Router){
         this.shared = SharedService.getInstance();
     }
 
@@ -18,9 +17,10 @@ export class AuthGuard implements CanActivate {
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
            if(this.shared.isLoggedIn()){
                 return true;
-           } else {
-               this.router.navigate(['/login']);
-               return false;
-           }
+           } 
+
+            this.router.navigate(['/login']);
+            return false;
+           
     }
 }
